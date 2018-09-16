@@ -6,7 +6,7 @@
 
 **URL语法**：通用格式：
 
-<scheme>://<user>:<passward>@<host>:<port>/<path>;<params>?<query>#<frag>
+`<scheme>://<user>:<passward>@<host>:<port>/<path>;<params>?<query>#<frag>`
 
 方案（scheme）：使用什么协议，如http,ftp
 
