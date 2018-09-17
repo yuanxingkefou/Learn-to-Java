@@ -97,7 +97,7 @@
     </user-data-constraint>
 </security-constraint>
 ```
-<transport-guarantee>的合法值：
+`<transport-guarantee>`的合法值：
 
 NONE：意味着没有数据保护
 
