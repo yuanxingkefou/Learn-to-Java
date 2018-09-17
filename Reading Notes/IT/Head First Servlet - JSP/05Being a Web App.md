@@ -4,7 +4,7 @@
 
 <context-param>作用于整个web App
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Reading%20Notes/IT/Head%20First%20Servlet%20-%20JSP/image/TheDifferenceBetweenServletAndContext.png)
 
 ServletConfig is one per Servlet
 
@@ -16,7 +16,7 @@ HttpSessionBindingListener类使得属性本身知道它何时增加到一个会
 
 **属性attribute和参数parameter的区别**
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Reading%20Notes/IT/Head%20First%20Servlet%20-%20JSP/image/AttributeAndParameter.png)
 
 **三个作用域：**
 
