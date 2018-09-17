@@ -36,7 +36,7 @@ of two packages: javax.servlet or javax.servlet.http.
 
 11）You can override the init() method, and you must override at least one service method (doGet(), doPost(),etc.).
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/HttpAndHttpServletRequest.png)
 
 请求重定向（redirect)发生在客户端；
 
