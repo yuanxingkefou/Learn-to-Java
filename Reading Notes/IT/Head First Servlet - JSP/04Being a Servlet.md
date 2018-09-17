@@ -38,6 +38,8 @@ of two packages: javax.servlet or javax.servlet.http.
 
 ![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Reading%20Notes/IT/Head%20First%20Servlet%20-%20JSP/image/HttpAndHttpServletRequest.png)
 
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Reading%20Notes/IT/Head%20First%20Servlet%20-%20JSP/image/HttpServletResponse.png)
+
 请求重定向（redirect)发生在客户端；
 
 请求调度（despatch）发生在服务器端
