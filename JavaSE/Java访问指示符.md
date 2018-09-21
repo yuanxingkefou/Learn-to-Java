@@ -16,7 +16,8 @@ protected和friendly的区别：
 
 若子类和父类不在同一个包中，子类只会继承public和protected类型，不会继承friendly类型
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/JavaAccessModifiers.png
+)
 
 **下列修饰符不能在方法体中使用：**
 
