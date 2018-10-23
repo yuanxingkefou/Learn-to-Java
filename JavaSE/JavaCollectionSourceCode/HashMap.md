@@ -2,11 +2,13 @@
 
 **HashMap的数据结构：**
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/JavaCollectionSourceCode/HashMapStructure.png)
 
 HashMap在JDK1.8中采用的是数组+链表+红黑树的结构。在链表过长的时候可以通过转换成红黑树提升访问性能
 
 **HashMap的继承关系：**
+
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/JavaCollectionSourceCode/HashMapExtends.png)
 
 ```
 public class HashMap<K,V> extends AbstractMap<K,V>
