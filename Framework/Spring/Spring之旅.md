@@ -5,7 +5,7 @@
 * 激发POJO的潜能
   在基于Spring构建的应用中，它的类通常没有任何痕迹表明你使用了Spring规范的类
 
-* [依赖注入（DI）](https://github.com/yuanxingkefou/Learn-to-Java/new/master/Framework/Spring/依赖注入.md)  
+* [依赖注入（DI）](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Framework/Spring/依赖注入.md)  
   让相互协作的软件组件保持松散耦合
 
 * 应用切面（AOP）
