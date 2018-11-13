@@ -64,9 +64,11 @@ public CDPlayer cdPlayer(CompactDisc compactDisc)
 </beans>
 ```
 **借助构造器注入初始化bean**
+
 1）<constructor-arg>元素
 
 2）c-命名空间
+
 无法装配集合
 
 ```
@@ -107,13 +109,17 @@ public CDPlayer cdPlayer(CompactDisc compactDisc)
 <bean id="cdPlayer" class="soundsystem.CDPlayer"
     p:compactDisc-ref="compactDisc"  />
 ```
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Framework/Spring/spring-util.png)
 
 **导入和混合配置**
+
 1）在JavaConfig中引用XML配置
+
 使用@Import注解导入
+
 使用@ImportResource注解
 
 2）在XML配置中引用JavaConfig
+
 <import resource="" />
 
