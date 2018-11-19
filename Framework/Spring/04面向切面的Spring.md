@@ -37,3 +37,74 @@
 Spring还引入了一个新的bean()指示器:`execution(* concert.Performance.perform() ) and bean('beanName/beanId')`
 
 **##使用注解创建切面**
+
+通知注解：@After，@AfterReturning，@AfterThrowing，@Around，@Before
+
+使用 **@Pointcut** 注解声明频繁使用的切点表达式
+
+在JavaConfig中使用 **@EnableAspectJAutoProxy** 启用自动代理功能
+
+在XML中使用`<aop:aspectj-autoproxy>`元素
+
+创建环绕通知：
+
+```
+@Aspect
+public class Audience
+{
+    @Pointcut("")
+    public void performance()
+    
+    @Around("performance()")
+    public void watchPerformance(ProceedingJoinPoint jp)
+    {
+        try
+        {
+            System.out.println("Before");
+            jp.proceed();
+            System.out.println("After");
+        }catch(Exception e)
+        {
+            System.out.println("AfterThrowing");
+        }
+    }
+```
+
+通过注解引入新功能：
+
+使用 **@DeclareParents**注解，有三部分组成：
+* value属性指定了哪种类型的bean要引入该接口
+* defaultImpl属性指定了为引入功能提供实现的类
+* 所标注的静态属性指明了要引入的接口
+
+**##在XML中声明切面**
+
+![image]()
+
+```
+<aop:config>
+  <aop:aspect ref="audience">
+  
+    <aop:pointcut
+         id="performance"
+         expression="execution("" ...)" />
+         
+     //通过切面引入新的功能
+    <aop:declare-parents
+        type-matching="concert.Performance+"
+        implement-interface="concert.Encoreable"
+        default-impl="concert.DefaultEncoreable"  />
+        
+    <aop:before
+          pointcut=""
+          method="" />
+    
+  </aop:aspect>
+</aop:config>
+```
+
+**##注入AspectJ切面**
+
+AspectJ提供了SpringAOP所不能支持的许多类型的切点。
+
+在bean中使用了属性factory-method属性：`<bean class="" factory-method="aspectOf">
