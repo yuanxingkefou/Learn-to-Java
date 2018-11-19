@@ -8,7 +8,7 @@
 
 **@Component** 注解表明该类会作为组件类，并告知Spring要为这个类创建bean
 
-**@Component("idName")** 注解为组件扫描的bean命名为name；也可以使用 **@Named("idName")**
+**@Component("idName")** 注解为组件扫描的bean命名为idName；也可以使用 **@Named("idName")**
 
 **@ComponentScan** 注解启用了组件扫描；如果没有配置的话，会默认扫描与配置类相同的包以及包下的所有子包
 
@@ -102,7 +102,7 @@ public CDPlayer cdPlayer(CompactDisc compactDisc)
 
 //设置属性
 <bean id="cdPlayer" class="soundsystem.CDPlayer">
-    <propert name="compactDisc" ref="compactDisc" />
+    <property name="compactDisc" ref="compactDisc" />
 </bean>
 
 //p-命名空间
