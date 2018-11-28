@@ -9,7 +9,7 @@ Spring Security的模块
 
 ![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Framework/Spring/SpringSecurityModel.png)
 
-1)过滤web请求:DelegatingFilterProxy把Filter的处理逻辑委托给Spring应用
+**1)过滤web请求:DelegatingFilterProxy把Filter的处理逻辑委托给Spring应用**
 
 ```
 //在传统的web.xml中配置Servlet和Filter
@@ -91,4 +91,32 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception
 启用Remember-me功能
 
 ##保护视图
+
+
+**2）保护方法调用**
+
+##使用注解保护方法
+
+* 使用@Secured注解,通过重载GlobalMethodSecurityCongratulation中的configure()方法实现功能
+  ```
+  @Configuration
+  @EnableGlobalMethodSecurity(securedEnable=true)
+  public class MethodSecurityConfig
+                    extends GlobalMethodSecurityCongiguration
+  {}
+  //用户必须具备其中至少一个权限值才能进行方法的调用
+  @Secured({"权限值","权限值"})
+  public void 
+  ```
+
+* 使用@RolesAllowed注解，和@Secured注解基本一致
+
+##使用表达式实现方法级别的安全性
+
+注解                 |描述
+---------------------|-------------------
+@PreAuthorize        |在方法调用之前，基于表达式的计算结果来限制对方法的访问
+@PostAuthorize       |允许方法调用，但是如果方法表达式为false，将抛出一个安全性异常
+@PostFilter          |允许方法调用，但必须按照表达式来过滤方法的结果
+@PreFilter           |允许方法调用，但必须在进入方法前过滤输入值
 
