@@ -43,11 +43,11 @@
 
 状态类型            |作用                                             |  表现方式
 -------------------|-------------------------------------------------|----------------------------
-行为（Action)       |流程逻辑发生的地方|<action-state id="">    <evaluate expression="行为状态要做的事" />  </action-state>
-决策（Decision)     |将流程分成两个方向，基于流程数据的评估结果确定流程方向|<decision-state id="">  <if test="" then="" else="" /> </decision-state>
-结束（End）         |流程的最后一站，一旦进入End状态，流程就会终止|<end-state id="" />
-子流程（Subflow)    |会在当前正在运行的流程上下文中启动一个新的流程|<subflow-state id="" subflow=""> <input name="" value="" /> </subflow-state>
-视图（View）        |会暂停流程，并邀请用户参与流程|<view-state id="流程内标识名" view="逻辑视图名" model="表单所绑定的对象" />
+行为（Action)       |流程逻辑发生的地方| `<action-state id="">    <evaluate expression="行为状态要做的事" />  </action-state>`
+决策（Decision)     |将流程分成两个方向，基于流程数据的评估结果确定流程方向| `<decision-state id="">  <if test="" then="" else="" /> </decision-state>`
+结束（End）         |流程的最后一站，一旦进入End状态，流程就会终止| `<end-state id="" />`
+子流程（Subflow)    |会在当前正在运行的流程上下文中启动一个新的流程| `<subflow-state id="" subflow=""> <input name="" value="" /> </subflow-state>`
+视图（View）        |会暂停流程，并邀请用户参与流程| `<view-state id="流程内标识名" view="逻辑视图名" model="表单所绑定的对象" />`
 
 **转移**：通过转移的方式从一个状态到另一个状态
 
