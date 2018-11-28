@@ -7,7 +7,7 @@
 
 Spring Security的模块
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Framework/Spring/SpringSecurityModel.png)
 
 1)过滤web请求:DelegatingFilterProxy把Filter的处理逻辑委托给Spring应用
 
@@ -80,7 +80,7 @@ protected void configure(AuthenticationManagerBuilder auth) throws Exception
 
 ```
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Framework/Spring/InMemoryAuthentication.png)
 
 ##拦截请求
 
