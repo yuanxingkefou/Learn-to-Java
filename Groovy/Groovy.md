@@ -68,21 +68,32 @@
 * 可选的分号和返回语句  Groovy会自动返回最后一个表达式的计算结果
 
 * 可选的参数括号
-  `println "Hello,world"
+  `println "Hello,world"`
   
-* 访问限定符   Groovy的默认访问限定符是public
+* 访问限定符   
+  Groovy的默认访问限定符是public
 
-* 异常处理    不区分已检查异常和未检查异常，会忽略方法签名中的所有throws语句
+* 异常处理    
+  
+  不区分已检查异常和未检查异常，会忽略方法签名中的所有throws语句
 
-* 相等    Groovy把==当做Java中的equals()方法
+* 相等    
+  
+  Groovy把==当做Java中的equals()方法
 
-* 内部类   Groovy支持内部类，但是大多数情况下，用函数字面值替代它。
+* 内部类   
+  
+  Groovy支持内部类，但是大多数情况下，用函数字面值替代它。
 
 **##Java不具备的Groovy特性**
 
-* GroovyBean    省略了JavaBean显示声明的获取和设置方法，提供了自动构造方法，并可以用点号(.)引入成员变量
+* GroovyBean    
+  
+  省略了JavaBean显示声明的获取和设置方法，提供了自动构造方法，并可以用点号(.)引入成员变量
 
-* 安全解引用操作符    用?.操作符去掉一些套路化的“如果对象为null”检查代码，实现对null对象的安全访问
+* 安全解引用操作符    
+  
+  用?.操作符去掉一些套路化的“如果对象为null”检查代码，实现对null对象的安全访问
   ```
   class Person
   {
@@ -100,7 +111,8 @@
   test()
   ```
   
-* ?:操作符    可以把带有默认值的if/else结构写得及其短小，不用检查null,也不用重复变量。其实就是三元操作符的简写
+* ?:操作符    
+  可以把带有默认值的if/else结构写得及其短小，不用检查null,也不用重复变量。其实就是三元操作符的简写
 ```
 String agentStatus="Active";
 //Java中的三元操作符写法
@@ -180,11 +192,7 @@ Groovy正则表达式语法
 
 * 简单的XML处理
 ```
-<person id='2'>
-  <name>Gweneth</name>
-  <age>1</age>
-</person>
-可以用Groovy产生这个XML
+可以用Groovy产生XML
 def writer=new StringWriter()
 def xml=new groovy.xml.MarkupBuilder(writer)
 xml.person(id:2)
@@ -193,5 +201,63 @@ xml.person(id:2)
     age 1
 }
 println writer.toString()
+输出：
+<person id='2'>
+  <name>Gweneth</name>
+  <age>1</age>
+</person>
+
+//解析XML
+class XMLExample
+{
+    static def PERSON=
+    """
+    <person id='2'>
+        <name>Gweneth</name>
+        <age>1</age>
+    </person>
+    """
+ }
+ class Person
+ {
+     def id;
+     def name;
+     def age;
+ }
+ 
+ def xmlPerson=new XmlParser().parseText(XMLExample.PERSON)
+ Person p=new Person(id:xmlPerson.@id,
+                     name:xmlPerson.name.text(),
+                     age:xmlPerson.age.text())
+ println "${p.id},${p.name},${p.age}"
+ 输出：
+ 2,Gweneth,1
 ```
+
+**##Groovy与Java的合作**
+
+从Java调用Groovy
+
+需要把Groovy及其相关的JAR放到这个程序的CLASSPATH下
+
+* 使用Bean Scripting Framework（BSF），即JSR 223
+
+* 使用GroovyShell
+
+  在临时性快速调用Groovy并计算表达式或类似于脚本的代码时，可以用GroovyShell
+  ```
+  ```
+* 使用GroovyClassLoader
+  
+  先创建一个Groovy类文件，然后通过GroovyClassLoader获取这个类的实例来使用
+  ```
+  
+  ```
+* 使用GroovyScriptEngine
+  
+  要指明Groovy代码的URL或所在目录。Groovy脚本引擎会加载那些脚本，并在必要时进行编译，包括其中的依赖脚本
+  ```
+  ```
+  
+
 
