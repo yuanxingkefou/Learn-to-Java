@@ -246,17 +246,86 @@ class XMLExample
 
   在临时性快速调用Groovy并计算表达式或类似于脚本的代码时，可以用GroovyShell
   ```
+  import groovy.lang.GroovyShell;
+  import groovy.lang.Binding;
+  import java.math.BigDecimal;
+  public class UseGroovyShell 
+  {
+	  public static void main(String[] args)
+	  {
+		  Binding binding=new Binding();
+		  binding.setVariable("x", 2.4);
+		  binding.setVariable("y", 8);
+		
+		  GroovyShell shell=new GroovyShell(binding);
+		  Object value=shell.evaluate("x+y");
+		  System.out.println(value.toString());
+		  assert value.equals(new BigDecimal(10.4));
+	  }
+  }
+
   ```
 * 使用GroovyClassLoader
   
-  先创建一个Groovy类文件，然后通过GroovyClassLoader获取这个类的实例来使用
+  先创建一个Groovy类文件，然后通过GroovyClassLoader获取这个类的实例来使用。在调用Groovy中的一些实用类时使用
   ```
-  
+  public class UseGroovyClassLoader 
+  {
+	  public static void main(String[] args)
+	  {
+		  //准备GroovyClassLoader
+		  GroovyClassLoader loader=new GroovyClassLoader();
+		
+		  try
+		  {
+			  //得到Groovy类
+			  Class<?> groovyClass=loader.parseClass(new File("CalculateMax.groovy"));
+			  //得到Groovy类的实例
+			  GroovyObject groovyObject=(GroovyObject)groovyClass.newInstance();
+			
+			  //准备参数
+			  ArrayList<Integer> numbers=new ArrayList<>();
+			  numbers.add(new Integer(1));
+			  numbers.add(new Integer(10));
+			
+			  Object[] arguments={numbers};
+			  Object value=groovyObject.invokeMethod("getMax", arguments);
+			  assert value.equals(new Integer(10));
+			  System.out.println(value.toString());
+		  }catch(CompilationFailedException | IOException | InstantiationException 
+				  | IllegalAccessException e)
+		  {
+			  e.printStackTrace();
+		  }
+	  }
+  }
+
   ```
 * 使用GroovyScriptEngine
   
-  要指明Groovy代码的URL或所在目录。Groovy脚本引擎会加载那些脚本，并在必要时进行编译，包括其中的依赖脚本
+  要指明Groovy代码的URL或所在目录。Groovy脚本引擎会加载那些脚本，并在必要时进行编译，包括其中的依赖脚本。使用大量Groovy代码时使用
   ```
+  public class UseGroovyScriptEngine 
+  {
+	  public static void main(String[] args)
+	  {
+		  try
+		  {
+			  String[] roots=new String[]{"D:\\ecplise\\java\\GroovyTest\\src\\groovy"};
+			  GroovyScriptEngine gse=new GroovyScriptEngine(roots);
+			
+			  Binding binding=new Binding();
+			  binding.setVariable("name", "John");
+			
+			  Object output=gse.run("Hello.groovy", binding);
+			  assert output.equals("Hello John");
+			  System.out.println(output.toString());
+		  }catch(IOException | ResourceException | ScriptException e)
+		  {
+			  e.printStackTrace();
+		  }
+	  }
+  }
   ```
   
 
