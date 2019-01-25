@@ -1,4 +1,4 @@
-[image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/String.gif)
+[image] (https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/String.gif)
 
 **#String**
 
