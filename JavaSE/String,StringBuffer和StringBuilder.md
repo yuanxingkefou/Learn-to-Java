@@ -1,3 +1,5 @@
+[image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/String.gif)
+
 **#String**
 
 String是不可变字符串，因为String类被final修饰，所以不可被继承。
@@ -48,3 +50,11 @@ StringBuffer在进行字符串处理时，不生成新的对象，在内存上�
 **#StringBuilder**
 
 具有与StringBuffer兼容的API，是StringBuffer的一个简易替换，但不保证同步，因此速度要更快一点
+
+**三者区别：**
+
+* 运行速度：
+  StringBuilder>StringBuffer>String
+  
+* String和StringBuffer是线程安全的，StringBuilder是线程不安全的
+
