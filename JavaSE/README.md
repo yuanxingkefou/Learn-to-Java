@@ -1,6 +1,6 @@
 **#Java的基本程序设计结构**
 
-* [Java的数据类型] (https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/Java的数据类型.md)
+* [Java的数据类型](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/JavaSE/Java的数据类型.md)
 * 变量初始化
 * 字符串
 
