@@ -152,7 +152,94 @@ public class RefletionDemo02
 
 ```
 
-3）实现通用的数组操作代码
+3）反射操作泛型
+
+Java采用泛型擦除的机制来引入泛型，但是，一旦编译完成，所有的和泛型有关的数据类型全部擦除。
+
+为了通过反射操作这些类型以迎合实际开发的需要，Java就新增了以下几种类型来代表不能归一到Class中的类型但是又和原始类型齐名的类型
+
+* ParameterizedType:表示一种参数化的类型，比如Collection<String>
+
+* GenericArrayType:表示一种元素类型是参数化类型或者类型变量的数据类型
+
+* TypeVariable:是各种类型变量的公共父接口
+
+* WildcardType:代表一种通配符表达式,如? extends Number等
+```
+/**
+ * 通过反射获取泛型信息
+ * @author ASUS
+ *
+ */
+public class ReflectionDemo03 
+{
+	public static void main(String[] args) 
+	{
+		try {
+			//获得指定方法参数泛型信息
+			Method m=ReflectionDemo03.class.getMethod("test01", Map.class,List.class);
+			Type[] t=m.getGenericParameterTypes();
+			
+			for(Type paramType:t)
+			{
+				System.out.println("#"+paramType);
+				
+				if(paramType instanceof ParameterizedType)
+				{
+					Type[] genericTypes=((ParameterizedType) paramType).getActualTypeArguments();
+					for(Type genericType: genericTypes)
+					{
+						System.out.println("泛型类型："+genericType);
+					}
+				}
+			}
+			System.out.println("---------------------------");
+			//获得指定方法返回值泛型信息
+			Method m2=ReflectionDemo03.class.getMethod("test02", null);
+			Type returnType=m2.getGenericReturnType();
+			if(returnType instanceof ParameterizedType)
+			{
+				Type[] genericTypes=((ParameterizedType) returnType).getActualTypeArguments();
+				for(Type genericType: genericTypes)
+				{
+					System.out.println("返回值的泛型类型："+genericType);
+				}
+			}
+			
+			
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	public void test01(Map<String,User> map,List<User> list)
+	{
+		System.out.println("Demo03.test01");
+	}
+	
+	public Map<Integer,User> test02()
+	{
+		System.out.println("Demo03.test02");
+		return null;
+	}
+}
+输出：
+#java.util.Map<java.lang.String, com.test.User>
+泛型类型：class java.lang.String
+泛型类型：class com.test.User
+#java.util.List<com.test.User>
+泛型类型：class com.test.User
+---------------------------
+返回值的泛型类型：class java.lang.Integer
+返回值的泛型类型：class com.test.User
+
+```
 
 4）利用Method对象，这个对象很向C++中的函数指针
 
