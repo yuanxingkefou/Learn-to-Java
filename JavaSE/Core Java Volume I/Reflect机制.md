@@ -14,9 +14,143 @@
 
 **反射机制可以用来：**
 
-1）在运行中查看类的能力
+1）在运行中查看类的能力，动态加载类，获取类的信息
+```
+/**
+ * 应用反射的API，获取类的信息（类的名字，方法，属性，构造器等）
+ * @author ASUS
+ *
+ */
+public class ReflectionDemo 
+{
+	public static void main(String[] args) 
+	{
+		String path="com.test.User";
+		
+		try {
+			Class user=Class.forName(path);
+			
+			//获取类的名字
+			/*
+			 * 输出：com.test.User
+			 *		User
+			 */
+			System.out.println("--------获取类的名字-----------");
+			System.out.println(user.getName());
+			System.out.println(user.getSimpleName());
+			
+			/**
+			 * 获取属性信息
+			 */
+			System.out.println("--------获取类的属性信息-----------");
+			Field[] fields=user.getFields();	//只能获得public的field
+			for(Field temp:fields)
+			{
+				System.out.println("public属性："+temp);
+			}
+			Field[] fields2=user.getDeclaredFields();	//获得所有field
+			for(Field temp:fields2)
+			{
+				System.out.println("全部属性："+temp);
+			}
+			/**
+			 * 获取方法(Method)信息（类似与属性信息）
+			 */
+			try {
+				//如果方法有参数，则必须传递参数类型所对应的Class对象，用来识别重载的方法
+				Method m=user.getDeclaredMethod("setName", String.class);
+			} catch (NoSuchMethodException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			/**
+			 * 获取构造器(Constructor)信息(与方法，属性类似)
+			 */
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
-2）在运行中查看对象，
+}
+
+```
+
+2）动态构造对象，调用类和对象的任意方法，调用和处理属性
+```
+public class RefletionDemo02 
+{
+	public static void main(String[] args) 
+			throws ClassNotFoundException, InstantiationException, 
+			IllegalAccessException, NoSuchMethodException, SecurityException 
+	{
+		String path="com.test.User";
+
+		Class c=Class.forName(path);
+		
+		/**
+		 * 调用构造方法，构造对象
+		 */
+		User u1=(User)c.newInstance(); 			//相当于使用无参构造器
+		
+		try {
+			Constructor<User> c1=c.getDeclaredConstructor(int.class,int.class,String.class);
+			//调用有参数的构造器
+			User u2=c1.newInstance(1001,15,"John");
+			//输出：John
+			System.out.println(u2.getName());
+		} catch (NoSuchMethodException | SecurityException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		/**
+		 * 通过反射API，调用普通方法
+		 */
+		User u3=(User)c.newInstance();
+		Method method=c.getDeclaredMethod("setName", String.class);
+		try {
+			method.invoke(u3, "Tom");			//u3.setName("Tom");
+			System.out.println(u3.getName());
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}			
+		/**
+		 * 利用反射的API，修改类的属性
+		 */
+		try {
+			User u4=(User)c.newInstance();
+			Field f=c.getDeclaredField("name");
+			/**
+			 * 报错：不能访问私有属性
+			 * f.set(u4, "Tim");
+			 */
+			//解决方法：使用setAccessible(true);使该属性不需要进行安全检查，可以直接访问
+			f.setAccessible(true);
+			f.set(u4, "test4");
+			System.out.println(u4.getName());
+		} catch (NoSuchFieldException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+	}
+
+}
+
+```
 
 3）实现通用的数组操作代码
 
