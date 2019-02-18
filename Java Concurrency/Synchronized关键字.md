@@ -2,7 +2,7 @@
 
 是一种同步锁，修饰的对象有以下几种：
 
-* 修饰一个代码块，作用的范围是用{}括起来的代码块，作用于调用这个代码块的对象
+* **修饰一个代码块**，作用的范围是用{}括起来的代码块，作用于调用这个代码块的对象
 
 每个对象只与一个锁相关联，所以如果有两个线程访问两个对象的同步代码块，并不会发生互斥
 
@@ -49,7 +49,7 @@ thread1 count :4
 
   当一个线程访问对象的一个synchronized(this)同步代码块时，另一个线程仍然可以访问该对象中的非synchronized(this)同步代码块
 
-* 修饰一个方法，作用的范围是整个方法，作用于调用这个方法的对象
+* **修饰一个方法**，作用的范围是整个方法，作用于调用这个方法的对象
 
   注：
   
@@ -64,10 +64,60 @@ thread1 count :4
   3.在定义接口方法时不能使用synchronized关键字。
 
   4.构造方法不能使用synchronized关键字，但可以使用synchronized代码块来进行同步
-  
-* 修饰一个类
 
-* 修饰一个静态方法
+* **修饰一个静态方法**,作用的范围是整个方法，作用于该类的所有对象
+
+* **修饰一个类**，作用于该类的所有对象,与静态方法类似
+
+```
+package concurrent;
+
+public class SynchronizedClass implements Runnable
+{
+	private static int count=0;
+	
+	public void method()
+	{
+		//synchronized修饰一个类
+		synchronized(SynchronizedClass.class)
+		{
+			for(int i=0;i<5;i++)
+			{
+				System.out.println(Thread.currentThread().getName()+"count: "+count++);
+			}
+		}
+	}
+	
+	@Override
+	public void run() {
+		method();		
+	}
+	
+	public static void main(String[] args) {
+		SynchronizedClass sc=new SynchronizedClass();
+		SynchronizedClass sc2=new SynchronizedClass();
+		Thread thread=new Thread(sc,"thread1");
+		Thread thread2=new Thread(sc2,"thread2");
+		thread.start();
+		thread2.start();
+	}
+}
+/*
+输出为：
+thread1count: 0
+thread1count: 1
+thread1count: 2
+thread1count: 3
+thread1count: 4
+thread2count: 5
+thread2count: 6
+thread2count: 7
+thread2count: 8
+thread2count: 9
+*/
+
+```
+
 
 程序在执行过程中，如果出现异常，默认情况锁会释放
 ```
