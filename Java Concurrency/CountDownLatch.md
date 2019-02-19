@@ -1,8 +1,0 @@
-#CountDownLatch
-
-使用Latch（门闩）替代wait notify来进行通知
-好处是通信方式简单，同时也可以指定等待时间
-使用await和countdown方法替代wait和notify
-CountDownLatch不涉及锁定，当count的值为零时当前线程继续运行
-当不涉及同步，只是涉及线程通信的时候，用synchronized + wait/notify就显得太重了
-这时应该考虑countdownlatch/cyclicbarrier/semaphore
