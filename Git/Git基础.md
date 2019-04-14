@@ -22,4 +22,4 @@
 
 * 已提交
 
-![image]()
+![image](https://github.com/yuanxingkefou/Learn-to-Java/blob/master/Git/image/GitStatus.png)
