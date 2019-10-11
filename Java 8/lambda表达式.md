@@ -29,25 +29,85 @@ Comparator<Apple> byWeight =new Comparator<Apple>()
 
 可以使用@FunctionalInterface来标示，方便编译检查
 
+**Supplier<T>**
+
+无参有返， T get()
+```
+Supplier<T>		//提供一个T类型的对象
+IntSupplier 		//提供一个Int类型的对象
+LongSupplier 		//提供一个Long类型的对象
+DoubleSupplier 		//提供一个Double类型的对象
+BooleanSupplier 	//提供一个Boolean类型的对象
+```
+
 **Predicate<T>**
 
 定义了一个test的抽象方法，接受一个泛型对象T，返回一个boolean值
+
+```
+Perdicate<T>		//接受单个参数，进行判断
+BiPerdicate<T,U>	//接受两个参数，进行判断
+IntPerdicate		//接受一个Integer类型的参数，进行判断
+LongPerdicate		//接受一个Long类型的参数，进行判断
+DoublePerdicate		//接受一个Double类型的参数，进行判断
+```
 
 **Consumer<T>**
 
 定义了一个accept的抽象方法，接受一个泛型对象T，没有返回（void）
 
+```
+Consumer<T>		//接受单个参数，进行消费
+BiConsumer<T,U>		//接受两个参数，进行消费
+IntConsumer		//接受一个Integer类型的参数，进行消费
+LongConsumer		//接受一个Long类型的参数，进行消费
+DoubleConsumer		//接受一个Double类型的参数，进行消费
+ObjIntConsumer<T>	//接受T和Integer类型的参数，进行消费
+ObjLongConsumer<T>	//接受T和Long类型的参数，进行消费
+ObjDoubleConsumer<T>    //接受T和Double类型的参数，进行消费
+```
+
 **Function<T,R>**
 
 定义了一个apply的抽象方法，接受一个泛型对象T，并返回一个泛型为R的对象
 
-T,R只能是引用类型，基本类型可以使用装箱后的类型，但需要消耗更多的内存，所以有以下接口：
+```
+Function<T,R>			//接受T类型的参数，转换成R类型。
 
-IntPredicate，DoublePredicate，ToIntFunction，IntToDoubleFunction等
+IntFunction<R>			//接受Integer类型的参数，转换成R类型。
+LongFunction<R>			//接受Long类型的参数，转换成R类型。
+DoubleFunction<R>		//接受Double类型的参数，转换成R类型。
 
-常用的函数式接口还有：Supplier<T>, UnaryOperator<T>, BinaryOperator<T>,
+ToIntFunction<T>		//接受T类型的参数，转换成Integer类型。
+ToLongFunction<T>		//接受T类型的参数，转换成Long类型。
+ToDoubleFunction<T>		//接受T类型的参数，转换成Double类型。
 
-BiPredicate<L,R> ,BiConsumer<T,U>, BiFunction<T,U,R>
+IntToLongFunction		//接受Int类型的参数，转换成Long类型。
+IntToDoubleFunction		//接受Int类型的参数，转换成Double类型。
+LongToIntFunction<T>		//接受Long类型的参数，转换成Integer类型。
+LongToDoubleFunction<T>		//接受Long类型的参数，转换成Double类型。
+DoubleToIntFunction<T>		//接受Double类型的参数，转换成Integer类型。
+DoubleToLongFunction<T>		//接受Double类型的参数，转换成Long类型。
+
+ToIntBiFunction<T,U>		//接受T类型和U类型的参数，转换成Integer类型。
+ToLongBiFunction<T,U>		//接受T类型和U类型的参数，转换成Long类型。
+ToDoubleBiFunction<T,U>		//接受T类型和U类型的参数，转换成Double类型。
+
+IntUnaryOperator		//接受Integer类型的参数，转换成Integer类型。可以理解为`一元操作符`。
+LongUnaryOperator		//接受Long类型的参数，转换成Long类型。
+DoubleUnaryOperator		//接受Double类型的参数，转换成Double类型。
+
+IntBinaryOperator		//接受2个Integer类型的参数，转换成Integer类型。可以理解为`二元操作符`。
+LongBinaryOperator		//接受2个Long类型的参数，转换成Long类型。
+DoubleBinaryOperator		//接受2个Double类型的参数，转换成Double类型。
+
+```
+
+常用的函数式接口还有：
+
+UnaryOperator<T>: 对类型T进行的一元操作
+	
+BinaryOperator<T>：对类型T进行的二元操作
 
 **##原理**
 
@@ -108,7 +168,7 @@ Negate(),and,or
 
 **函数复合**
 
-AndThen(),compose()
+andThen(),compose()
 
 ```
 Function<Integer, Integer> f=x ->x+1;
